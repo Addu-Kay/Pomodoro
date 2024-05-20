@@ -12,7 +12,7 @@ body {
   font-family: Helvetica, sans-serif;
 }
 
-.container {
+.timer-container {
   display: flex;
   font-size: 50px;
   color: aliceblue;
@@ -20,7 +20,7 @@ body {
   align-items: center;
 }
 
-#start {
+#start-button {
   height: 55px;
   width: 130px;
   font-size: 28px;
@@ -31,41 +31,26 @@ body {
   letter-spacing: 2.5px;
 }
 
-#start:hover,
-.transparent-button:hover {
+#start-button:hover,
+.icon-button:hover {
   background-color: transparent;
   color: white;
   cursor: pointer;
 }
 
-.transparent-button {
+.icon-button {
   background-color: transparent;
   border-color: transparent;
 }
 
-.button-container {
+.button-group {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
 
-.settings-popup {
-  background-color: #A1DD70;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 20px;
-  height: 200px;
-  width: 250px;
-  position: absolute;
-  flex-direction: column;
-  color: white;
-  /* top: 0%;
-  transform: scale(0.1); */
-}
-
-.settings-popup .input-box {
+.input-wrapper {
   height: 40px;
   width: 25%;
   border-radius: 5px;
@@ -76,12 +61,7 @@ body {
   background-color: white;
 }
 
-.settings-popup .input-box:active {
-  border: 2px solid seagreen;
-}
-
-
-.input-box input {
+.input-wrapper input {
   width: 90%;
   height: 100%;
   border: none;
@@ -89,14 +69,12 @@ body {
   font-size: 20px;
 }
 
-
-
-.settings-popup h2 {
+.settings-modal h2 {
   font-size: 40px;
   justify-self: start;
 }
 
-.settings-popup button {
+.settings-modal button {
   height: 30px;
   width: 80px;
   font-size: 20px;
@@ -107,17 +85,38 @@ body {
   letter-spacing: 1.2px;
 }
 
-#close {
+#close-button {
   background-color: #799351;
   color: white;
 }
 
-.settings-popup button:hover,
-#close:hover {
+.settings-modal button:hover,
+#close-button:hover {
   cursor: pointer;
+  color: white;
+  background-color: transparent;
 }
 
-.offmodal{
-  display: none;
+.settings-modal {
+  background-color: #A1DD70;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 20px;
+  height: 200px;
+  width: 250px;
+  position: absolute;
+  flex-direction: column;
+  color: white;
+  transform: translateY(-120%);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
 }
 
+
+.show {
+  visibility: visible;
+  transform: translateY(0%);
+  opacity: 1;
+}
