@@ -9,7 +9,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: cursive;
+  font-family: Helvetica, sans-serif;
 }
 
 .container {
@@ -20,18 +20,104 @@ body {
   align-items: center;
 }
 
-button {
+#start {
   height: 55px;
-  width: 140px;
-  font-size: 25px;
+  width: 130px;
+  font-size: 28px;
   color: black;
   border-radius: 25px;
   border: 1px solid white;
   background-color: white;
+  letter-spacing: 2.5px;
 }
 
-button:hover {
-  background-color: tomato;
+#start:hover,
+.transparent-button:hover {
+  background-color: transparent;
   color: white;
   cursor: pointer;
 }
+
+.transparent-button {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.settings-popup {
+  background-color: #A1DD70;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 20px;
+  height: 200px;
+  width: 250px;
+  position: absolute;
+  flex-direction: column;
+  color: white;
+  /* top: 0%;
+  transform: scale(0.1); */
+}
+
+.settings-popup .input-box {
+  height: 40px;
+  width: 25%;
+  border-radius: 5px;
+  background-color: transparent;
+  color: aqua;
+  border: 2px solid hsl(93, 62%, 95%);
+  padding-left: 10px;
+  background-color: white;
+}
+
+.settings-popup .input-box:active {
+  border: 2px solid seagreen;
+}
+
+
+.input-box input {
+  width: 90%;
+  height: 100%;
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+
+
+
+.settings-popup h2 {
+  font-size: 40px;
+  justify-self: start;
+}
+
+.settings-popup button {
+  height: 30px;
+  width: 80px;
+  font-size: 20px;
+  color: black;
+  border-radius: 25px;
+  border: 1px solid white;
+  background-color: white;
+  letter-spacing: 1.2px;
+}
+
+#close {
+  background-color: #799351;
+  color: white;
+}
+
+.settings-popup button:hover,
+#close:hover {
+  cursor: pointer;
+}
+
+.offmodal{
+  display: none;
+}
+

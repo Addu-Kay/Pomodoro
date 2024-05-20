@@ -1,11 +1,8 @@
 const secContainer = document.getElementsByClassName("secContainer")[0];
 const minContainer = document.getElementsByClassName("minContainer")[0];
 const startButton = document.getElementById("start");
-const stopButton = document.getElementById("stop");
-const button25 = document.getElementById("25");
-const button60 = document.getElementById("60");
-const button90 = document.getElementById("90");
-const submitButton = document.getElementById("submit");
+const replayButton = document.getElementById("replay");
+const settingsButton = document.getElementById("settings");
 
 // store the time id to stop the setInterval function
 let timeInterval;
@@ -13,56 +10,45 @@ let timeInterval;
 //milliseconds elapsed since the button was clicked
 let elapsedMilliseconds;
 
-// boolean to check if timer is paused
-let isPaused = false;
-
 // pomodoro time to countdown
 let pomodoroTime = 24;
 
 startButton.addEventListener("click", startTimer);
-stopButton.addEventListener("click", stopTimer);
-
-button25.addEventListener("click", () => {
-  pomodoroTime = 24;
-  document.querySelector(".minContainer").innerHTML = 25;
-});
-
-button60.addEventListener("click", () => {
-  pomodoroTime = 59;
-  document.querySelector(".minContainer").innerHTML = 60;
-});
-
-button90.addEventListener("click", () => {
-  pomodoroTime = 89;
-  document.querySelector(".minContainer").innerHTML = 90;
-});
-
-submitButton.addEventListener("click", () => {
-  pomodoroTime = 24;
-  document.querySelector(".minContainer").innerHTML = 25;
-})
+replayButton.addEventListener("click", reset);
+settingsButton.addEventListener("click", addClass);
 
 function startTimer() {
   let clickTime = Date.now();
   timeInterval = setInterval(() => {
     const currentTime = Date.now();
-    if (isPaused) {
-      clickTime = currentTime - (elapsedMilliseconds + 1000);
-      isPaused = false;
-    }
+
+    // milliseconds elapsed after the button was clicked
     elapsedMilliseconds = currentTime - clickTime;
+
+    // seconds elapsed after the button was clicked and keep the range between 0-59
     let elapsedSeconds = Math.floor(elapsedMilliseconds / 1000) % 60;
+
+    // minutes elapsed after the button was clicked
     let elapsedMinutes = Math.floor(elapsedMilliseconds / (60 * 1000));
+
+    // start the seconds from 59 and end with 0
     elapsedSeconds = 59 - elapsedSeconds;
+
+    // start with pomodoro Time and end with 0
     elapsedMinutes = pomodoroTime - elapsedMinutes;
+
+    // if the elapsedSecond is  single digit, add padding of 0 otherwise elapsedSecond
     secContainer.innerHTML =
       elapsedSeconds.toString().length == 2
         ? elapsedSeconds
         : `0${elapsedSeconds}`;
+
+    // if the elapsedMinute is  single digit, add padding of 0 otherwise elapsedMinute
     minContainer.innerHTML =
       elapsedMinutes.toString().length == 2
         ? elapsedMinutes
         : `0${elapsedMinutes}`;
+
     if (minContainer.innerHTML == 0 && secContainer.innerHTML == 0) {
       clearInterval(timeInterval);
       new Audio("../Audio/alarm.mp3").play();
@@ -70,7 +56,12 @@ function startTimer() {
   }, 100);
 }
 
-function stopTimer() {
-  isPaused = true;
+function reset() {
   clearInterval(timeInterval);
+  document.querySelector(".minContainer").innerHTML = pomodoroTime + 1;
+  document.querySelector(".secContainer").innerHTML = "00";
+}
+
+function addClass(event) {
+  document.getElementsByClassName("offmodal")[0].classList.remove("offmodal");
 }
