@@ -5,6 +5,7 @@ const replayButton = document.getElementById("replay-button");
 const settingsButton = document.getElementById("settings-button");
 const closeButton = document.getElementById("close-button");
 const saveButton = document.getElementById("save-button");
+const alarm = new Audio("./Audio/alarm.mp3");
 
 // Store the time id to stop the setInterval function
 let timeInterval;
@@ -55,7 +56,8 @@ function startTimer() {
 
     if (minContainer.innerHTML == 0 && secContainer.innerHTML == 0) {
       clearInterval(timeInterval);
-      new Audio("../Audio/alarm.mp3").play();
+      // new Audio("../Audio/alarm.mp3").play();
+      alarm.play();
     }
   }, 100);
 }
