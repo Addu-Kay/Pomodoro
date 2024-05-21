@@ -70,6 +70,7 @@ function startTimer() {
       clearInterval(timeInterval);
       // new Audio("../Audio/alarm.mp3").play();
       alarm.play();
+      startButton.innerHTML = "Start";
       minContainer.innerHTML =
         `${pomodoroTime + 1}`.length == 2
           ? pomodoroTime + 1
