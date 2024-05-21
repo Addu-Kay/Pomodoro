@@ -16,6 +16,9 @@ let elapsedMilliseconds;
 // Pomodoro time to countdown
 let pomodoroTime = 24;
 
+// to check whether the timer is running
+let isQuitting = true;
+
 startButton.addEventListener("click", startTimer);
 replayButton.addEventListener("click", reset);
 settingsButton.addEventListener("click", showSettingsModal);
@@ -24,6 +27,15 @@ saveButton.addEventListener("click", savePomodoroTime);
 
 function startTimer() {
   let clickTime = Date.now();
+  startButton.innerHTML = "Quit";
+  isQuitting = !isQuitting;
+  if (isQuitting) {
+    clearInterval(timeInterval);
+    reset();
+    startButton.innerHTML = "Start";
+    return;
+  }
+
   timeInterval = setInterval(() => {
     const currentTime = Date.now();
 
@@ -58,6 +70,10 @@ function startTimer() {
       clearInterval(timeInterval);
       // new Audio("../Audio/alarm.mp3").play();
       alarm.play();
+      minContainer.innerHTML =
+        `${pomodoroTime + 1}`.length == 2
+          ? pomodoroTime + 1
+          : `0${pomodoroTime + 1}`;
     }
   }, 100);
 }
@@ -65,8 +81,11 @@ function startTimer() {
 // reset time back to pomodoroTime
 function reset() {
   clearInterval(timeInterval);
-  document.querySelector(".minutes").innerHTML = pomodoroTime + 1;
-  document.querySelector(".seconds").innerHTML = "00";
+  minContainer.innerHTML =
+    `${pomodoroTime + 1}`.length == 2
+      ? pomodoroTime + 1
+      : `0${pomodoroTime + 1}`;
+  secContainer.innerHTML = "00";
 }
 
 // show settingsModal
